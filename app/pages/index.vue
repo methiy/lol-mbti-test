@@ -1,5 +1,7 @@
 <!-- app/pages/index.vue -->
 <script setup lang="ts">
+import type { Theme } from '~/composables/useQuiz'
+
 const {
   scene,
   currentScaleIndex,
@@ -20,12 +22,16 @@ const {
   showResult,
   restart,
 } = useQuiz()
+
+function handleStart(selectedTheme: Theme) {
+  startQuiz(selectedTheme)
+}
 </script>
 
 <template>
   <div class="app-container">
     <Transition name="fade" mode="out-in">
-      <WelcomePage v-if="scene === 'welcome'" key="welcome" @start="startQuiz" />
+      <WelcomePage v-if="scene === 'welcome'" key="welcome" @start="handleStart" />
 
       <div v-else-if="scene === 'scale'" key="scale" class="quiz-scene">
         <ProgressBar

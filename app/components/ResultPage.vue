@@ -1,12 +1,19 @@
 <!-- app/components/ResultPage.vue -->
 <script setup lang="ts">
 import type { MatchResult, ScaleQuestion, ScenarioQuestion } from '~/types'
+import { regions as lolRegions } from '~/data/regions'
+import { heroes as lolHeroes } from '~/data/heroes'
+import { factions as opFactions } from '~/data/onepiece/factions'
+import { characters as opCharacters } from '~/data/onepiece/characters'
 
 const emit = defineEmits<{ restart: [] }>()
 
-const { scaleAnswers, scenarioAnswers, activeScaleQuestions, activeScenarioQuestions } = useQuiz()
+const { theme, scaleAnswers, scenarioAnswers, activeScaleQuestions, activeScenarioQuestions } = useQuiz()
 const { calculateScores } = useScoring()
 const { getMatchResult } = useMatching()
+
+const activeRegions = computed(() => theme.value === 'lol' ? lolRegions : opFactions)
+const activeHeroes = computed(() => theme.value === 'lol' ? lolHeroes : opCharacters)
 
 const result = computed<MatchResult>(() => {
   const scores = calculateScores(
@@ -15,7 +22,7 @@ const result = computed<MatchResult>(() => {
     activeScaleQuestions.value as ScaleQuestion[],
     activeScenarioQuestions.value as ScenarioQuestion[],
   )
-  return getMatchResult(scores)
+  return getMatchResult(scores, activeRegions.value, activeHeroes.value)
 })
 
 const sectionRefs = ref<HTMLElement[]>([])

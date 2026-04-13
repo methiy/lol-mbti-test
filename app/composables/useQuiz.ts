@@ -1,10 +1,12 @@
 // app/composables/useQuiz.ts
 import type { ScaleQuestion, ScenarioQuestion } from '~/types'
 import { scaleQuestions as allScaleQuestions } from '~/data/scaleQuestions'
-import { scenarioQuestions as allScenarioQuestions } from '~/data/scenarioQuestions'
+import { scenarioQuestions as lolScenarios } from '~/data/scenarioQuestions'
+import { scenarioQuestions as opScenarios } from '~/data/onepiece/scenarioQuestions'
 import { DIMENSION_IDS } from '~/data/dimensions'
 
 export type Scene = 'welcome' | 'scale' | 'scenario' | 'loading' | 'result'
+export type Theme = 'lol' | 'onepiece'
 
 const SCALE_PER_DIMENSION = 3
 const SCENARIO_COUNT = 8
@@ -29,13 +31,14 @@ function pickScaleQuestions(): ScaleQuestion[] {
   return shuffle(picked) // shuffle final order so dimensions are mixed
 }
 
-/** Pick random scenario questions */
-function pickScenarioQuestions(): ScenarioQuestion[] {
-  const shuffled = shuffle([...allScenarioQuestions])
+/** Pick random scenario questions from a given pool */
+function pickScenarioQuestions(pool: ScenarioQuestion[]): ScenarioQuestion[] {
+  const shuffled = shuffle([...pool])
   return shuffled.slice(0, SCENARIO_COUNT)
 }
 
 const scene = ref<Scene>('welcome')
+const theme = ref<Theme>('lol')
 const activeScaleQuestions = ref<ScaleQuestion[]>([])
 const activeScenarioQuestions = ref<ScenarioQuestion[]>([])
 const scaleAnswers = ref<(number | null)[]>([])
@@ -61,10 +64,12 @@ export function useQuiz() {
     return scenarioAnswers.value.filter((a) => a !== null).length / total
   })
 
-  function startQuiz() {
+  function startQuiz(selectedTheme: Theme = 'lol') {
+    theme.value = selectedTheme
     // Pick fresh random questions
     activeScaleQuestions.value = pickScaleQuestions()
-    activeScenarioQuestions.value = pickScenarioQuestions()
+    const scenarioPool = selectedTheme === 'lol' ? lolScenarios : opScenarios
+    activeScenarioQuestions.value = pickScenarioQuestions(scenarioPool)
     scaleAnswers.value = new Array(activeScaleQuestions.value.length).fill(null)
     scenarioAnswers.value = new Array(activeScenarioQuestions.value.length).fill(null)
     currentScaleIndex.value = 0
@@ -124,6 +129,7 @@ export function useQuiz() {
 
   return {
     scene: readonly(scene),
+    theme: readonly(theme),
     activeScaleQuestions: readonly(activeScaleQuestions),
     activeScenarioQuestions: readonly(activeScenarioQuestions),
     scaleAnswers: readonly(scaleAnswers),

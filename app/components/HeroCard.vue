@@ -1,7 +1,8 @@
 <!-- app/components/HeroCard.vue -->
 <script setup lang="ts">
 import type { Hero, Region } from '~/types'
-import { regions } from '~/data/regions'
+import { regions as lolRegions } from '~/data/regions'
+import { factions as opFactions } from '~/data/onepiece/factions'
 
 defineProps<{
   topHeroes: { hero: Hero, similarity: number }[]
@@ -13,7 +14,8 @@ function similarityPercent(similarity: number): string {
 }
 
 function getHeroRegion(hero: Hero): Region | undefined {
-  return regions.find((r) => r.id === hero.regionId)
+  return lolRegions.find((r) => r.id === hero.regionId)
+    || opFactions.find((r) => r.id === hero.regionId)
 }
 </script>
 

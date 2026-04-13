@@ -1,8 +1,6 @@
 // app/composables/useMatching.ts
-import type { DimensionVector, MatchResult, Region } from '~/types'
+import type { DimensionVector, Hero, MatchResult, Region } from '~/types'
 import { DIMENSION_IDS } from '~/data/dimensions'
-import { heroes } from '~/data/heroes'
-import { regions } from '~/data/regions'
 
 export function useMatching() {
   /**
@@ -23,7 +21,7 @@ export function useMatching() {
     return 1 - dist / maxDist
   }
 
-  function matchRegion(scores: DimensionVector): { region: Region, similarity: number } {
+  function matchRegion(scores: DimensionVector, regions: Region[]): { region: Region, similarity: number } {
     let bestRegion = regions[0]
     let bestSim = -1
 
@@ -38,11 +36,11 @@ export function useMatching() {
     return { region: bestRegion, similarity: bestSim }
   }
 
-  function getMatchResult(scores: DimensionVector): MatchResult {
-    const { region, similarity: regionSimilarity } = matchRegion(scores)
+  function getMatchResult(scores: DimensionVector, regions: Region[], heroPool: Hero[]): MatchResult {
+    const { region, similarity: regionSimilarity } = matchRegion(scores, regions)
 
     // Primary hero: must be from the matched region
-    const regionHeroes = heroes
+    const regionHeroes = heroPool
       .filter((h) => h.regionId === region.id)
       .map((hero) => ({ hero, similarity: similarity(scores, hero.vector) }))
       .sort((a, b) => b.similarity - a.similarity)
@@ -50,7 +48,7 @@ export function useMatching() {
     const primaryHero = regionHeroes[0]
 
     // Secondary heroes: from all heroes globally, excluding the primary
-    const otherHeroes = heroes
+    const otherHeroes = heroPool
       .filter((h) => h.id !== primaryHero?.hero.id)
       .map((hero) => ({ hero, similarity: similarity(scores, hero.vector) }))
       .sort((a, b) => b.similarity - a.similarity)

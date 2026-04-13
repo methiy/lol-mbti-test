@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   future: { compatibilityVersion: 4 },
   app: {
     head: {
-      title: '你属于哪片土地？— LoL 性格测试',
+      title: '你属于哪片土地？— 性格测试',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

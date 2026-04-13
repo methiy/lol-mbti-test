@@ -1,0 +1,63 @@
+import type { SummaryTemplate } from '~/types'
+
+export const summaryTemplates: SummaryTemplate[] = [
+  // ===== Paragraph 1: Core Personality (based on top 2-3 dimensions) =====
+  { paragraph: 1, condition: { dimensionId: 'chaos', range: 'high' }, text: '你的灵魂如同大海一样自由不羁，任何规则都无法成为你的枷锁。' },
+  { paragraph: 1, condition: { dimensionId: 'chaos', range: 'low' }, text: '你如同海军的旗帜一般笔挺，在狂风巨浪中依然坚守自己的秩序与原则。' },
+  { paragraph: 1, condition: { dimensionId: 'intuition', range: 'high' }, text: '你拥有如同见闻色霸气般的敏锐直觉，总能在理性之外感知到真相的方向。' },
+  { paragraph: 1, condition: { dimensionId: 'intuition', range: 'low' }, text: '你如同航海中的指南针，用冷静的分析和缜密的逻辑为自己和伙伴指引方向。' },
+  { paragraph: 1, condition: { dimensionId: 'bond', range: 'high' }, text: '对你来说，伙伴就是一切——就像路飞说的"没有伙伴我什么都做不到"。' },
+  { paragraph: 1, condition: { dimensionId: 'bond', range: 'low' }, text: '你如同鹰眼一般在大海上独行，孤独是你选择的力量，不是命运的枷锁。' },
+  { paragraph: 1, condition: { dimensionId: 'conquest', range: 'high' }, text: '征服与力量在你血脉中沸腾，你天生就是为了在伟大航路上留下自己的名字。' },
+  { paragraph: 1, condition: { dimensionId: 'conquest', range: 'low' }, text: '和平是你心中最珍贵的宝藏，你相信理解与包容终将跨越一切鸿沟。' },
+  { paragraph: 1, condition: { dimensionId: 'explore', range: 'high' }, text: '未知的海域、神秘的岛屿，每一片未被标记的航路都是对你灵魂最强的召唤。' },
+  { paragraph: 1, condition: { dimensionId: 'explore', range: 'low' }, text: '你是坚定的守护者，如同锦卫门守护光月家二十年一般，保护珍视的一切是你永恒的使命。' },
+  { paragraph: 1, condition: { dimensionId: 'shadow', range: 'high' }, text: '你深谙海面之下的暗流，懂得在必要时利用暗影的力量达成光明无法触及的目标。' },
+  { paragraph: 1, condition: { dimensionId: 'shadow', range: 'low' }, text: '你的信条如同白胡子的旗帜——堂堂正正，宁走最难的路也不愿在阴影中前行。' },
+  { paragraph: 1, condition: { dimensionId: 'agility', range: 'high' }, text: '灵活应变是你在大海上生存的天赋，如同娜美在风暴中总能找到最安全的航路。' },
+  { paragraph: 1, condition: { dimensionId: 'agility', range: 'low' }, text: '你拥有如同凯多般"正面迎击"的坚韧意志，面对任何困难都选择硬碰硬、绝不退缩。' },
+  { paragraph: 1, condition: { dimensionId: 'ideal', range: 'high' }, text: '心中的理想如同路飞的草帽一般珍贵，那是你在最黑暗的时刻也不会放下的信念之灯。' },
+  { paragraph: 1, condition: { dimensionId: 'ideal', range: 'low' }, text: '你是脚踏实地的务实主义者，比起遥远的梦想，眼前的航路更值得你全力以赴。' },
+
+  // ===== Paragraph 2: Faction belonging =====
+  { paragraph: 2, condition: { dimensionId: 'chaos', range: 'high' }, text: '在{regionName}，你的不羁灵魂找到了共鸣的港湾。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'chaos', range: 'low' }, text: '{regionName}的秩序与纪律正是你内心所向往的归宿。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'conquest', range: 'high' }, text: '{regionName}的旗帜上写满了征服者的荣耀，而你的血液对此共鸣最为强烈。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'conquest', range: 'low' }, text: '{regionName}给予了你追求和平与共存的港湾。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'ideal', range: 'high' }, text: '你对理想的执着让你与{regionName}的信念紧密相连。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'ideal', range: 'low' }, text: '{regionName}的务实作风与你不谋而合。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'explore', range: 'high' }, text: '{regionName}满足了你对冒险和未知世界的无尽渴望。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'explore', range: 'low' }, text: '在{regionName}，你找到了值得用生命守护的一切。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'shadow', range: 'high' }, text: '{regionName}的暗影之海中，你如鱼得水。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'shadow', range: 'low' }, text: '{regionName}的光明信念与你心中的正义交相辉映。{regionLore}' },
+
+  // ===== Paragraph 3: Character resonance =====
+  { paragraph: 3, condition: { dimensionId: 'chaos', range: 'high' }, text: '如同{heroName}（{heroTitle}）一般，你骨子里流淌着自由与反叛的热血。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'chaos', range: 'low' }, text: '你与{heroName}（{heroTitle}）有着相似的坚守——{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'bond', range: 'high' }, text: '{heroName}（{heroTitle}）同样将伙伴与羁绊视为力量的源泉。{heroLore}你们在守护所爱之人这件事上，有着完全一致的信念。' },
+  { paragraph: 3, condition: { dimensionId: 'bond', range: 'low' }, text: '如同{heroName}（{heroTitle}），你选择了在大海上独行的道路。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'conquest', range: 'high' }, text: '{heroName}（{heroTitle}）与你共享着征服者的霸气。{heroLore}你们都相信，力量是在这片海上生存的唯一语言。' },
+  { paragraph: 3, condition: { dimensionId: 'ideal', range: 'high' }, text: '你与{heroName}（{heroTitle}）一样，为了心中的正义与梦想可以赌上一切。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'agility', range: 'high' }, text: '如同{heroName}（{heroTitle}），你在灵活应变中展现出真正的航海智慧。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'shadow', range: 'high' }, text: '{heroName}（{heroTitle}）也是暗影中的行者。{heroLore}你们都明白，有些战斗需要在看不见的地方打赢。' },
+  { paragraph: 3, condition: { dimensionId: 'explore', range: 'high' }, text: '{heroName}（{heroTitle}）与你有着同样的冒险之魂。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'intuition', range: 'high' }, text: '你与{heroName}（{heroTitle}）都拥有超越常理的直觉力量。{heroLore}' },
+
+  // ===== Paragraph 4: Growth (based on lowest dimensions) =====
+  { paragraph: 4, condition: { dimensionId: 'chaos', range: 'low' }, text: '或许有一天你会发现，就像罗杰在大海上肆意妄为后反而找到了One Piece——适度的"混沌"可能会为你打开意想不到的航路。' },
+  { paragraph: 4, condition: { dimensionId: 'chaos', range: 'high' }, text: '自由的灵魂也需要偶尔的锚点。也许在某个港口你会发现，有些规矩的存在不是为了束缚你，而是为了让你的冒险有所依托。' },
+  { paragraph: 4, condition: { dimensionId: 'intuition', range: 'low' }, text: '逻辑固然强大，但有些航路藏在海图之外。试着偶尔放下航海仪器，像路飞那样倾听内心的声音——它也许会带你到计算永远无法抵达的海域。' },
+  { paragraph: 4, condition: { dimensionId: 'intuition', range: 'high' }, text: '直觉虽然灵敏，但理性的验证能让你的判断更加坚实。在关键航路上慢下来用逻辑检验一下直觉的指引，你会发现两者结合的力量远超任何一方。' },
+  { paragraph: 4, condition: { dimensionId: 'bond', range: 'low' }, text: '独行者的强大毋庸置疑，但如同索隆在加入草帽团后变得更强，打开心扉接纳伙伴或许不是弱点，而是通向更强大的航路。' },
+  { paragraph: 4, condition: { dimensionId: 'bond', range: 'high' }, text: '守护伙伴是崇高的选择，但别忘了也给自己留一些独处的海域。有时候一个人在甲板上吹风不是孤独，而是让你重新认识自己的方式。' },
+  { paragraph: 4, condition: { dimensionId: 'conquest', range: 'low' }, text: '和平是美好的愿景，但这片海上并不总是以和平回应和平。学会在必要时展现霸王色的气魄，不是背离信念，而是为信念增添守护的力量。' },
+  { paragraph: 4, condition: { dimensionId: 'conquest', range: 'high' }, text: '征服之路虽然荣耀，但最伟大的海贼王也懂得何时收拳。真正的王者不只在于赢得每场战斗，更在于知道哪些战斗根本不需要打。' },
+  { paragraph: 4, condition: { dimensionId: 'explore', range: 'low' }, text: '守护的决心令人敬佩，但偶尔向未知的海域张望，你可能会发现——有些值得守护的宝藏，恰恰藏在你从未踏足的岛屿上。' },
+  { paragraph: 4, condition: { dimensionId: 'explore', range: 'high' }, text: '探索者总是渴望下一片海域的风景，但有时回头看看走过的航路，你会发现那些被你匆匆路过的岛屿，其实也值得驻足和珍惜。' },
+  { paragraph: 4, condition: { dimensionId: 'shadow', range: 'low' }, text: '光明是伟大的追求，但大海的深处比表面复杂得多。理解暗流的存在不会让你的信念动摇——反而会让你的航行更加稳健。' },
+  { paragraph: 4, condition: { dimensionId: 'shadow', range: 'high' }, text: '暗影中的高手也需要阳光。偶尔走上甲板晒晒太阳，坦诚面对自己和伙伴，你会发现有些力量不需要隐藏也同样强大。' },
+  { paragraph: 4, condition: { dimensionId: 'agility', range: 'low' }, text: '坚韧是你的船锚，但灵活不是软弱的同义词。如同大船在暴风中调整帆向而不折断桅杆，适时的变通可以让你的航行走得更远。' },
+  { paragraph: 4, condition: { dimensionId: 'agility', range: 'high' }, text: '灵巧让你在大海上游刃有余，但有些风暴需要的不是绕道，而是正面穿越。学会在必要时站定船舵，你会发现自己远比想象中更加坚强。' },
+  { paragraph: 4, condition: { dimensionId: 'ideal', range: 'low' }, text: '务实让你航行稳健，但偶尔抬头望望星空吧——不是为了脱离航线，而是为脚下的航路赋予到达拉夫德鲁的意义。' },
+  { paragraph: 4, condition: { dimensionId: 'ideal', range: 'high' }, text: '理想是你的风帆，但风帆也需要坚实的船体支撑。在追逐One Piece的路上，别忘了脚下的甲板——最伟大的梦想，也需要一个航段一个航段地实现。' },
+]

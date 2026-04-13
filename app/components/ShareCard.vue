@@ -23,7 +23,8 @@ async function downloadImage() {
     })
 
     const link = document.createElement('a')
-    link.download = `lol-personality-${props.result.region.nameEn.toLowerCase()}.png`
+    const { theme } = useQuiz()
+    link.download = `${theme.value}-personality-${props.result.region.nameEn.toLowerCase().replace(/\s+/g, '-')}.png`
     link.href = canvas.toDataURL('image/png')
     link.click()
   }
