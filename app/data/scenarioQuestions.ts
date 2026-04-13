@@ -81,4 +81,84 @@ export const scenarioQuestions: ScenarioQuestion[] = [
       { label: 'D', text: '卖给出价最高的人，记忆是别人的事。', weights: { shadow: 1, ideal: -2 } },
     ],
   },
+  {
+    id: 9,
+    narrative: '你在祖安的地下市场发现了一个孩子正在被黑帮逼迫做苦工。',
+    options: [
+      { label: 'A', text: '直接动手救人，管他什么后果。', weights: { bond: 2, chaos: 1 } },
+      { label: 'B', text: '暗中跟踪黑帮，找到他们的老巢后一网打尽。', weights: { shadow: 2, agility: 1 } },
+      { label: 'C', text: '用钱赎人，暴力解决不了根本问题。', weights: { agility: 1, ideal: -1 } },
+      { label: 'D', text: '这不关我的事，祖安每天都在发生这种事。', weights: { bond: -2, ideal: -1 } },
+    ],
+  },
+  {
+    id: 10,
+    narrative: '巨神峰的试炼中，你必须在两条路之间选择：一条安全但漫长，一条危险但能直达峰顶。',
+    options: [
+      { label: 'A', text: '选择危险的捷径——真正的勇者不会绕路。', weights: { conquest: 2, explore: 1 } },
+      { label: 'B', text: '走安全的长路——活着到达才是目的。', weights: { ideal: -1, agility: -1 } },
+      { label: 'C', text: '研究两条路的地形，找出第三条路线。', weights: { explore: 2, intuition: -1 } },
+      { label: 'D', text: '先走危险路段一小段探探情况，不行再回头。', weights: { agility: 2, explore: 1 } },
+    ],
+  },
+  {
+    id: 11,
+    narrative: '你在恕瑞玛的遗迹中发现了一段被隐藏的历史真相，它与当前统治者宣传的版本完全不同。',
+    options: [
+      { label: 'A', text: '公布真相——人民有权知道真实的历史。', weights: { ideal: 2, chaos: 1 } },
+      { label: 'B', text: '保守秘密——稳定比真相更重要。', weights: { chaos: -2, bond: 1 } },
+      { label: 'C', text: '把真相作为筹码，与统治者谈判。', weights: { shadow: 2, conquest: 1 } },
+      { label: 'D', text: '继续调查，确保掌握完整的事实后再做决定。', weights: { explore: 1, intuition: -1 } },
+    ],
+  },
+  {
+    id: 12,
+    narrative: '皮尔特沃夫的进步日庆典上，一个发明家展示了能取代大量工人的自动化机器。工人们正在抗议。',
+    options: [
+      { label: 'A', text: '支持发明家——进步不该被恐惧阻止。', weights: { explore: 2, ideal: 1 } },
+      { label: 'B', text: '站在工人这边——技术不该以牺牲人的生计为代价。', weights: { bond: 2, chaos: -1 } },
+      { label: 'C', text: '提议折中方案——逐步过渡，给工人转型时间。', weights: { agility: 1, bond: 1 } },
+      { label: 'D', text: '不参与——这是他们自己的事，看热闹就好。', weights: { bond: -1, shadow: 1 } },
+    ],
+  },
+  {
+    id: 13,
+    narrative: '你的队友在战斗中背叛了你，但现在他身负重伤倒在你面前，请求你的帮助。',
+    options: [
+      { label: 'A', text: '救他——以德报怨，这就是我的原则。', weights: { bond: 2, ideal: 1 } },
+      { label: 'B', text: '无视他——背叛的代价就是被抛弃。', weights: { conquest: 1, shadow: 1 } },
+      { label: 'C', text: '救他，但要求他从此效忠于我。', weights: { shadow: 2, conquest: 1 } },
+      { label: 'D', text: '先问清楚为什么背叛，理由合理就救。', weights: { intuition: -1, agility: 1 } },
+    ],
+  },
+  {
+    id: 14,
+    narrative: '艾欧尼亚的一处圣地正在被外来者开发为商业区，长老们分歧严重。你会如何影响决策？',
+    options: [
+      { label: 'A', text: '坚决反对——圣地不可亵渎，传统必须守护。', weights: { ideal: 2, chaos: -1 } },
+      { label: 'B', text: '支持开发——发展经济才能真正保护更多东西。', weights: { ideal: -1, explore: 1 } },
+      { label: 'C', text: '提议在保留核心区域的前提下有限开发。', weights: { agility: 2, bond: 1 } },
+      { label: 'D', text: '暗中联络民众发起抗议，让长老会不得不让步。', weights: { shadow: 1, chaos: 2 } },
+    ],
+  },
+  {
+    id: 15,
+    narrative: '你在弗雷尔卓德的冰穴中发现了一头被冰封的远古巨兽。它似乎还活着，只是沉睡。',
+    options: [
+      { label: 'A', text: '唤醒它——如此强大的存在不该被困住。', weights: { chaos: 2, explore: 1 } },
+      { label: 'B', text: '永远封印它——谁也不知道它醒来会做什么。', weights: { chaos: -1, bond: 1 } },
+      { label: 'C', text: '研究它的力量，看能否为己所用。', weights: { explore: 2, shadow: 1 } },
+      { label: 'D', text: '尝试与它沟通——也许它有自己的故事。', weights: { intuition: 2, bond: 1 } },
+    ],
+  },
+  {
+    id: 16,
+    narrative: '比尔吉沃特的船长选举中，你可以投给一个残暴但能带来秩序的强人，或一个善良但可能无法控制局面的领袖。',
+    options: [
+      { label: 'A', text: '投给强人——乱世需要铁腕。', weights: { conquest: 2, chaos: -1 } },
+      { label: 'B', text: '投给善良的领袖——暴力统治终究不可持续。', weights: { ideal: 2, bond: 1 } },
+      { label: 'C', text: '两个都不投，自己来当——我比他们都强。', weights: { conquest: 2, chaos: 2 } },
+      { label: 'D', text: '看看谁给的好处多就投谁，政治就是交易。', weights: { shadow: 1, ideal: -2 } },
+    ],
+  },
 ]

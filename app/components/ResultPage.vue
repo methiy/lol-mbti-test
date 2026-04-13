@@ -1,10 +1,10 @@
 <!-- app/components/ResultPage.vue -->
 <script setup lang="ts">
-import type { MatchResult } from '~/types'
+import type { MatchResult, ScaleQuestion, ScenarioQuestion } from '~/types'
 
 const emit = defineEmits<{ restart: [] }>()
 
-const { scaleAnswers, scenarioAnswers } = useQuiz()
+const { scaleAnswers, scenarioAnswers, activeScaleQuestions, activeScenarioQuestions } = useQuiz()
 const { calculateScores } = useScoring()
 const { getMatchResult } = useMatching()
 
@@ -12,6 +12,8 @@ const result = computed<MatchResult>(() => {
   const scores = calculateScores(
     scaleAnswers.value as (number | null)[],
     scenarioAnswers.value as (number | null)[],
+    activeScaleQuestions.value as ScaleQuestion[],
+    activeScenarioQuestions.value as ScenarioQuestion[],
   )
   return getMatchResult(scores)
 })

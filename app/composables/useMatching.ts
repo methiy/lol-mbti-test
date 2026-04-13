@@ -38,19 +38,25 @@ export function useMatching() {
     return { region: bestRegion, similarity: bestSimilarity }
   }
 
-  function matchHeroes(scores: DimensionVector): { hero: Hero, similarity: number }[] {
-    const heroScores = heroes.map((hero) => ({
-      hero,
-      similarity: cosineSimilarity(scores, hero.vector),
-    }))
-
-    heroScores.sort((a, b) => b.similarity - a.similarity)
-    return heroScores.slice(0, 3)
-  }
-
   function getMatchResult(scores: DimensionVector): MatchResult {
     const { region, similarity: regionSimilarity } = matchRegion(scores)
-    const topHeroes = matchHeroes(scores)
+
+    // Primary hero: must be from the matched region
+    const regionHeroes = heroes
+      .filter((h) => h.regionId === region.id)
+      .map((hero) => ({ hero, similarity: cosineSimilarity(scores, hero.vector) }))
+      .sort((a, b) => b.similarity - a.similarity)
+
+    const primaryHero = regionHeroes[0]
+
+    // Secondary heroes: from all heroes globally, excluding the primary
+    const otherHeroes = heroes
+      .filter((h) => h.id !== primaryHero?.hero.id)
+      .map((hero) => ({ hero, similarity: cosineSimilarity(scores, hero.vector) }))
+      .sort((a, b) => b.similarity - a.similarity)
+      .slice(0, 2)
+
+    const topHeroes = primaryHero ? [primaryHero, ...otherHeroes] : otherHeroes
 
     return {
       region,

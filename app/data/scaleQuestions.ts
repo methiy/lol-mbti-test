@@ -40,4 +40,44 @@ export const scaleQuestions: ScaleQuestion[] = [
   { id: 22, text: '我常常会为了一个遥远的理想而放弃眼前的利益。', dimensionId: 'ideal', reverse: false },
   { id: 23, text: '比起画饼，我更关心当下能得到什么。', dimensionId: 'ideal', reverse: true },
   { id: 24, text: '我相信信念的力量终将改变现实。', dimensionId: 'ideal', reverse: false },
+
+  // ===== chaos (秩序⟷混沌) — additional =====
+  { id: 25, text: '我觉得太多的条条框框会扼杀创造力。', dimensionId: 'chaos', reverse: false },
+  { id: 26, text: '在团队中，我更希望有明确的分工和流程。', dimensionId: 'chaos', reverse: true },
+  { id: 27, text: '混乱中往往蕴含着最大的机遇。', dimensionId: 'chaos', reverse: false },
+
+  // ===== intuition (理性⟷直觉) — additional =====
+  { id: 28, text: '第一印象往往比深思熟虑后的判断更准确。', dimensionId: 'intuition', reverse: false },
+  { id: 29, text: '我做决定前会列出所有利弊进行对比。', dimensionId: 'intuition', reverse: true },
+  { id: 30, text: '有些事情我说不出原因，但就是知道该怎么做。', dimensionId: 'intuition', reverse: false },
+
+  // ===== bond (独行⟷羁绊) — additional =====
+  { id: 31, text: '分享快乐比独自享受更让我满足。', dimensionId: 'bond', reverse: false },
+  { id: 32, text: '我不喜欢依赖别人，也不希望别人依赖我。', dimensionId: 'bond', reverse: true },
+  { id: 33, text: '为了朋友，我愿意承受很大的个人损失。', dimensionId: 'bond', reverse: false },
+
+  // ===== conquest (和平⟷征服) — additional =====
+  { id: 34, text: '退让不是软弱，而是一种智慧。', dimensionId: 'conquest', reverse: true },
+  { id: 35, text: '在任何领域，我都想成为最强的那个人。', dimensionId: 'conquest', reverse: false },
+  { id: 36, text: '面对挑衅，我倾向于直接回击而非忍让。', dimensionId: 'conquest', reverse: false },
+
+  // ===== explore (守护⟷探索) — additional =====
+  { id: 37, text: '旅行时我更喜欢去从未听说过的地方。', dimensionId: 'explore', reverse: false },
+  { id: 38, text: '稳定的日常生活比频繁的变化更让我安心。', dimensionId: 'explore', reverse: true },
+  { id: 39, text: '我对"为什么"的好奇远超对"是什么"的关注。', dimensionId: 'explore', reverse: false },
+
+  // ===== shadow (光明⟷暗影) — additional =====
+  { id: 40, text: '善意的谎言有时比残酷的真相更好。', dimensionId: 'shadow', reverse: false },
+  { id: 41, text: '我觉得一个人的行为应该经得起所有人的审视。', dimensionId: 'shadow', reverse: true },
+  { id: 42, text: '掌握别人不知道的信息是一种重要的优势。', dimensionId: 'shadow', reverse: false },
+
+  // ===== agility (坚韧⟷灵巧) — additional =====
+  { id: 43, text: '遇到走不通的路，我会毫不犹豫地换一条。', dimensionId: 'agility', reverse: false },
+  { id: 44, text: '即使所有人都放弃了，我也会继续坚持。', dimensionId: 'agility', reverse: true },
+  { id: 45, text: '见招拆招比制定长远计划更适合我。', dimensionId: 'agility', reverse: false },
+
+  // ===== ideal (务实⟷理想) — additional =====
+  { id: 46, text: '我经常思考什么样的世界才是理想的世界。', dimensionId: 'ideal', reverse: false },
+  { id: 47, text: '梦想再美好，也不如一个靠谱的计划。', dimensionId: 'ideal', reverse: true },
+  { id: 48, text: '有些东西比金钱和地位更值得追求。', dimensionId: 'ideal', reverse: false },
 ]
