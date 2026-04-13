@@ -66,3 +66,20 @@ a {
   color: var(--color-gold);
   text-decoration: none;
 }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .quiz-scene {
+    padding: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}

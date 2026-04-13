@@ -15,39 +15,92 @@ const result = computed<MatchResult>(() => {
   )
   return getMatchResult(scores)
 })
+
+const sectionRefs = ref<HTMLElement[]>([])
+const visibleSections = ref<Set<number>>(new Set())
+
+function setSectionRef(el: any, index: number) {
+  if (el) sectionRefs.value[index] = el
+}
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const index = sectionRefs.value.indexOf(entry.target as HTMLElement)
+        if (entry.isIntersecting && index >= 0) {
+          visibleSections.value.add(index)
+        }
+      })
+    },
+    { threshold: 0.15 },
+  )
+
+  nextTick(() => {
+    sectionRefs.value.forEach((el) => {
+      if (el) observer.observe(el)
+    })
+  })
+
+  onUnmounted(() => observer.disconnect())
+})
 </script>
 
 <template>
   <div class="result-page">
     <!-- Region banner -->
-    <section class="result-section region-banner">
+    <section
+      :ref="(el) => setSectionRef(el, 0)"
+      class="result-section region-banner"
+      :class="{ visible: visibleSections.has(0) }"
+    >
       <h2 class="region-name">{{ result.region.name }}</h2>
       <p class="region-name-en">{{ result.region.nameEn }}</p>
       <p class="region-desc">{{ result.region.description }}</p>
     </section>
 
     <!-- Radar chart -->
-    <section class="result-section">
+    <section
+      :ref="(el) => setSectionRef(el, 1)"
+      class="result-section"
+      :class="{ visible: visibleSections.has(1) }"
+    >
       <RadarChart :scores="result.dimensionScores" />
     </section>
 
     <!-- Dimension readings -->
-    <section class="result-section">
+    <section
+      :ref="(el) => setSectionRef(el, 2)"
+      class="result-section"
+      :class="{ visible: visibleSections.has(2) }"
+    >
       <DimensionReadings :scores="result.dimensionScores" />
     </section>
 
     <!-- Hero cards -->
-    <section class="result-section">
+    <section
+      :ref="(el) => setSectionRef(el, 3)"
+      class="result-section"
+      :class="{ visible: visibleSections.has(3) }"
+    >
       <HeroCard :top-heroes="result.topHeroes" :region="result.region" />
     </section>
 
     <!-- Summary text -->
-    <section class="result-section">
+    <section
+      :ref="(el) => setSectionRef(el, 4)"
+      class="result-section"
+      :class="{ visible: visibleSections.has(4) }"
+    >
       <SummaryText :result="result" />
     </section>
 
     <!-- Share & restart -->
-    <section class="result-section actions">
+    <section
+      :ref="(el) => setSectionRef(el, 5)"
+      class="result-section actions"
+      :class="{ visible: visibleSections.has(5) }"
+    >
       <ShareCard :result="result" />
       <button class="restart-btn" @click="emit('restart')">重新测试</button>
     </section>
@@ -64,6 +117,14 @@ const result = computed<MatchResult>(() => {
 
 .result-section {
   margin-bottom: var(--space-2xl);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.result-section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .region-banner {
