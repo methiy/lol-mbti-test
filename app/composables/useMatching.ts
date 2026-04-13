@@ -1,41 +1,41 @@
 // app/composables/useMatching.ts
-import type { DimensionVector, Hero, MatchResult, Region } from '~/types'
+import type { DimensionVector, MatchResult, Region } from '~/types'
 import { DIMENSION_IDS } from '~/data/dimensions'
 import { heroes } from '~/data/heroes'
 import { regions } from '~/data/regions'
 
 export function useMatching() {
-  function cosineSimilarity(a: DimensionVector, b: DimensionVector): number {
-    let dotProduct = 0
-    let normA = 0
-    let normB = 0
-
+  /**
+   * Euclidean distance-based similarity.
+   * Returns 0-1 where 1 = identical, 0 = maximum distance.
+   * Much better than cosine similarity for positive-valued vectors
+   * where all dimensions are in the same 1-10 range.
+   */
+  function similarity(a: DimensionVector, b: DimensionVector): number {
+    let sumSq = 0
     for (const dimId of DIMENSION_IDS) {
-      const va = a[dimId]
-      const vb = b[dimId]
-      dotProduct += va * vb
-      normA += va * va
-      normB += vb * vb
+      const diff = a[dimId] - b[dimId]
+      sumSq += diff * diff
     }
-
-    const denominator = Math.sqrt(normA) * Math.sqrt(normB)
-    if (denominator === 0) return 0
-    return dotProduct / denominator
+    const dist = Math.sqrt(sumSq)
+    // Max possible distance: sqrt(8 * 9^2) = sqrt(648) ≈ 25.46
+    const maxDist = Math.sqrt(DIMENSION_IDS.length * 81)
+    return 1 - dist / maxDist
   }
 
   function matchRegion(scores: DimensionVector): { region: Region, similarity: number } {
     let bestRegion = regions[0]
-    let bestSimilarity = -1
+    let bestSim = -1
 
     for (const region of regions) {
-      const similarity = cosineSimilarity(scores, region.vector)
-      if (similarity > bestSimilarity) {
-        bestSimilarity = similarity
+      const sim = similarity(scores, region.vector)
+      if (sim > bestSim) {
+        bestSim = sim
         bestRegion = region
       }
     }
 
-    return { region: bestRegion, similarity: bestSimilarity }
+    return { region: bestRegion, similarity: bestSim }
   }
 
   function getMatchResult(scores: DimensionVector): MatchResult {
@@ -44,7 +44,7 @@ export function useMatching() {
     // Primary hero: must be from the matched region
     const regionHeroes = heroes
       .filter((h) => h.regionId === region.id)
-      .map((hero) => ({ hero, similarity: cosineSimilarity(scores, hero.vector) }))
+      .map((hero) => ({ hero, similarity: similarity(scores, hero.vector) }))
       .sort((a, b) => b.similarity - a.similarity)
 
     const primaryHero = regionHeroes[0]
@@ -52,7 +52,7 @@ export function useMatching() {
     // Secondary heroes: from all heroes globally, excluding the primary
     const otherHeroes = heroes
       .filter((h) => h.id !== primaryHero?.hero.id)
-      .map((hero) => ({ hero, similarity: cosineSimilarity(scores, hero.vector) }))
+      .map((hero) => ({ hero, similarity: similarity(scores, hero.vector) }))
       .sort((a, b) => b.similarity - a.similarity)
       .slice(0, 2)
 
@@ -66,5 +66,5 @@ export function useMatching() {
     }
   }
 
-  return { getMatchResult, cosineSimilarity }
+  return { getMatchResult, similarity }
 }
