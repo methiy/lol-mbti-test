@@ -34,29 +34,32 @@ export function useQuiz() {
 
   function answerScale(questionIndex: number, value: number) {
     scaleAnswers.value[questionIndex] = value
-    if (questionIndex < totalScaleQuestions - 1) {
-      currentScaleIndex.value = questionIndex + 1
-    }
-    else {
-      // Check if all scale questions answered
-      const allAnswered = scaleAnswers.value.every((a) => a !== null)
-      if (allAnswered) {
-        scene.value = 'scenario'
+    setTimeout(() => {
+      if (questionIndex < totalScaleQuestions - 1) {
+        currentScaleIndex.value = questionIndex + 1
       }
-    }
+      else {
+        const allAnswered = scaleAnswers.value.every((a) => a !== null)
+        if (allAnswered) {
+          scene.value = 'scenario'
+        }
+      }
+    }, 500)
   }
 
   function answerScenario(questionIndex: number, optionIndex: number) {
     scenarioAnswers.value[questionIndex] = optionIndex
-    if (questionIndex < totalScenarioQuestions - 1) {
-      currentScenarioIndex.value = questionIndex + 1
-    }
-    else {
-      const allAnswered = scenarioAnswers.value.every((a) => a !== null)
-      if (allAnswered) {
-        scene.value = 'loading'
+    setTimeout(() => {
+      if (questionIndex < totalScenarioQuestions - 1) {
+        currentScenarioIndex.value = questionIndex + 1
       }
-    }
+      else {
+        const allAnswered = scenarioAnswers.value.every((a) => a !== null)
+        if (allAnswered) {
+          scene.value = 'loading'
+        }
+      }
+    }, 500)
   }
 
   function goToScaleQuestion(index: number) {

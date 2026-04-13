@@ -1,6 +1,7 @@
 <!-- app/components/HeroCard.vue -->
 <script setup lang="ts">
 import type { Hero, Region } from '~/types'
+import { regions } from '~/data/regions'
 
 defineProps<{
   topHeroes: { hero: Hero, similarity: number }[]
@@ -9,6 +10,10 @@ defineProps<{
 
 function similarityPercent(similarity: number): string {
   return `${Math.round(similarity * 100)}%`
+}
+
+function getHeroRegion(hero: Hero): Region | undefined {
+  return regions.find((r) => r.id === hero.regionId)
 }
 </script>
 
@@ -23,7 +28,7 @@ function similarityPercent(similarity: number): string {
       </div>
       <h4 class="hero-name">{{ topHeroes[0].hero.name }}</h4>
       <p class="hero-title">{{ topHeroes[0].hero.title }}</p>
-      <p class="hero-region">{{ region.name }} · {{ topHeroes[0].hero.nameEn }}</p>
+      <p class="hero-region">{{ getHeroRegion(topHeroes[0].hero)?.name ?? region.name }} · {{ topHeroes[0].hero.nameEn }}</p>
       <div class="match-badge">匹配度 {{ similarityPercent(topHeroes[0].similarity) }}</div>
       <p class="hero-desc">{{ topHeroes[0].hero.description }}</p>
     </div>
