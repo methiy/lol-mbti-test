@@ -1,0 +1,63 @@
+import type { SummaryTemplate } from '~/types'
+
+export const summaryTemplates: SummaryTemplate[] = [
+  // ===== Paragraph 1: Core Personality (based on top 2-3 dimensions) =====
+  { paragraph: 1, condition: { dimensionId: 'chaos', range: 'high' }, text: '你的灵魂中涌动着不安分的因子，规则对你来说不过是等待被打破的枷锁。' },
+  { paragraph: 1, condition: { dimensionId: 'chaos', range: 'low' }, text: '你是秩序的守护者，在混乱的世界中坚守着自己的原则和底线。' },
+  { paragraph: 1, condition: { dimensionId: 'intuition', range: 'high' }, text: '你的直觉如同一盏暗夜中的明灯，总能在理性无法触及的地方找到方向。' },
+  { paragraph: 1, condition: { dimensionId: 'intuition', range: 'low' }, text: '冷静的分析和缜密的逻辑是你最强大的武器，你从不让感性左右重要的判断。' },
+  { paragraph: 1, condition: { dimensionId: 'bond', range: 'high' }, text: '对你而言，身边的人就是你战斗的全部理由，守护他们的笑容比任何荣耀都更有意义。' },
+  { paragraph: 1, condition: { dimensionId: 'bond', range: 'low' }, text: '你习惯独自面对世界的挑战，孤独是你选择的力量，而非命运的惩罚。' },
+  { paragraph: 1, condition: { dimensionId: 'conquest', range: 'high' }, text: '征服与力量是写在你骨子里的渴望，你天生就是为了战胜一切阻碍而存在。' },
+  { paragraph: 1, condition: { dimensionId: 'conquest', range: 'low' }, text: '和平是你心中最崇高的理想，你相信理解与包容终将化解一切纷争。' },
+  { paragraph: 1, condition: { dimensionId: 'explore', range: 'high' }, text: '每一片未知的领域都像磁石般吸引着你，探索是你生命中不可或缺的主旋律。' },
+  { paragraph: 1, condition: { dimensionId: 'explore', range: 'low' }, text: '你是坚定的守护者，保护所珍视的一切是你不变的使命。' },
+  { paragraph: 1, condition: { dimensionId: 'shadow', range: 'high' }, text: '你深谙光与影的辩证关系，懂得在必要时运用暗影的力量达成目标。' },
+  { paragraph: 1, condition: { dimensionId: 'shadow', range: 'low' }, text: '光明磊落是你不可动摇的信条，你宁可走更难的路，也不愿在阴影中前行。' },
+  { paragraph: 1, condition: { dimensionId: 'agility', range: 'high' }, text: '灵活应变是你的天赋，你如同流水般在障碍之间找到最优雅的通道。' },
+  { paragraph: 1, condition: { dimensionId: 'agility', range: 'low' }, text: '你拥有磐石般的坚韧意志，面对任何困难都选择正面迎击、绝不退缩。' },
+  { paragraph: 1, condition: { dimensionId: 'ideal', range: 'high' }, text: '心中的理想如同永不熄灭的火焰，即使在最黑暗的时刻也照亮你前行的道路。' },
+  { paragraph: 1, condition: { dimensionId: 'ideal', range: 'low' }, text: '你是脚踏实地的务实主义者，眼前的现实比遥远的梦想更值得关注。' },
+
+  // ===== Paragraph 2: Region belonging (generic templates, filled with region lore) =====
+  { paragraph: 2, condition: { dimensionId: 'chaos', range: 'high' }, text: '在{regionName}，你的不羁灵魂终于找到了共鸣。这片土地的气质与你如出一辙——{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'chaos', range: 'low' }, text: '{regionName}的秩序与纪律正是你内心所向往的。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'conquest', range: 'high' }, text: '{regionName}的土地上回荡着征服者的号角，而你的血液对此共鸣最为强烈。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'conquest', range: 'low' }, text: '{regionName}给予了你追求和平的空间。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'ideal', range: 'high' }, text: '你对理想的执着让你与{regionName}的信念深深相连。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'ideal', range: 'low' }, text: '{regionName}的务实精神与你不谋而合。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'explore', range: 'high' }, text: '{regionName}满足了你对未知世界的渴望。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'explore', range: 'low' }, text: '在{regionName}，你找到了值得守护的一切。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'shadow', range: 'high' }, text: '{regionName}的暗影之中，你如鱼得水。{regionLore}' },
+  { paragraph: 2, condition: { dimensionId: 'shadow', range: 'low' }, text: '{regionName}的光芒与你心中的正义交相辉映。{regionLore}' },
+
+  // ===== Paragraph 3: Hero resonance =====
+  { paragraph: 3, condition: { dimensionId: 'chaos', range: 'high' }, text: '如同{heroName}（{heroTitle}）一般，你骨子里流淌着反叛的血液。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'chaos', range: 'low' }, text: '你与{heroName}（{heroTitle}）有着相似的坚守——{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'bond', range: 'high' }, text: '{heroName}（{heroTitle}）同样将羁绊视为力量的源泉。{heroLore}你们在守护所爱之人这件事上，有着完全一致的信念。' },
+  { paragraph: 3, condition: { dimensionId: 'bond', range: 'low' }, text: '如同{heroName}（{heroTitle}），你选择了独行的道路。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'conquest', range: 'high' }, text: '{heroName}（{heroTitle}）与你共享着征服者的野心。{heroLore}你们都相信，力量是改写命运的唯一语言。' },
+  { paragraph: 3, condition: { dimensionId: 'ideal', range: 'high' }, text: '你与{heroName}（{heroTitle}）一样，为了信念可以赌上一切。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'agility', range: 'high' }, text: '如同{heroName}（{heroTitle}），你在灵活应变中展现出真正的强大。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'shadow', range: 'high' }, text: '{heroName}（{heroTitle}）也是暗影的行者。{heroLore}你们都明白，光明看不到的角落里才藏着真正的力量。' },
+  { paragraph: 3, condition: { dimensionId: 'explore', range: 'high' }, text: '{heroName}（{heroTitle}）与你有着同样的探索之心。{heroLore}' },
+  { paragraph: 3, condition: { dimensionId: 'intuition', range: 'high' }, text: '你与{heroName}（{heroTitle}）都是直觉的信徒。{heroLore}' },
+
+  // ===== Paragraph 4: Growth (based on lowest dimensions) =====
+  { paragraph: 4, condition: { dimensionId: 'chaos', range: 'low' }, text: '或许有一天，你会发现打破规则并非意味着失控——就像有些英雄在背离常规后反而找到了真正的自我。适度的"混沌"可能会为你打开意想不到的大门。' },
+  { paragraph: 4, condition: { dimensionId: 'chaos', range: 'high' }, text: '自由的灵魂也需要偶尔的锚点。也许在某个时刻你会发现，某些规则的存在不是为了束缚你，而是为了让你的力量有所依托。' },
+  { paragraph: 4, condition: { dimensionId: 'intuition', range: 'low' }, text: '逻辑固然强大，但有些真相藏在数据之外。试着偶尔放下分析的框架，倾听内心那个微弱却真实的声音——它也许会带你到计算永远无法抵达的地方。' },
+  { paragraph: 4, condition: { dimensionId: 'intuition', range: 'high' }, text: '直觉虽然灵敏，但理性的验证能让你的判断更加坚实。在关键时刻，慢下来用逻辑检验一下直觉的指引，你会发现两者结合的力量远超任何一方。' },
+  { paragraph: 4, condition: { dimensionId: 'bond', range: 'low' }, text: '独行者的强大毋庸置疑，但如同亚索在漫长流浪后终于理解了同伴的意义，打开心扉接纳他人或许不是弱点，而是另一种更深沉的勇气。' },
+  { paragraph: 4, condition: { dimensionId: 'bond', range: 'high' }, text: '守护他人是崇高的选择，但别忘了也给自己留一些空间。有时候独处不是孤独，而是让你重新认识自己、积蓄力量的方式。' },
+  { paragraph: 4, condition: { dimensionId: 'conquest', range: 'low' }, text: '和平是美好的愿景，但世界并不总是以和平回应和平。学会在必要时展现力量，不是背离信念，而是为信念增添守护的分量。' },
+  { paragraph: 4, condition: { dimensionId: 'conquest', range: 'high' }, text: '征服之路虽然荣耀，但最伟大的统帅也懂得何时收剑。真正的力量不只在于赢得每场战斗，更在于知道哪些战斗根本不需要打。' },
+  { paragraph: 4, condition: { dimensionId: 'explore', range: 'low' }, text: '守护的决心令人敬佩，但偶尔抬头看看地平线以外的风景，你可能会发现——有些值得守护的东西，恰恰藏在未知的旅途之中。' },
+  { paragraph: 4, condition: { dimensionId: 'explore', range: 'high' }, text: '探索者总是渴望前方的风景，但有时回头看看走过的路，你会发现那些被你匆匆路过的地方，其实也值得驻足和珍惜。' },
+  { paragraph: 4, condition: { dimensionId: 'shadow', range: 'low' }, text: '光明是伟大的追求，但世界的复杂有时超越了黑白分明的框架。理解灰色地带的存在，不会让你的光芒暗淡——反而会让它更加真实。' },
+  { paragraph: 4, condition: { dimensionId: 'shadow', range: 'high' }, text: '暗影中的高手也需要阳光。偶尔走出阴影，坦诚面对自己和他人，你会发现有些力量不需要隐藏也同样强大。' },
+  { paragraph: 4, condition: { dimensionId: 'agility', range: 'low' }, text: '坚韧是你的基石，但灵活不是软弱的同义词。如同大树在暴风中弯腰而不折断，适时的变通可以让你的坚持走得更远。' },
+  { paragraph: 4, condition: { dimensionId: 'agility', range: 'high' }, text: '灵巧让你游刃有余，但有些时刻需要的不是闪避，而是正面承受。学会在必要时站定脚跟，你会发现自己远比想象中更加坚强。' },
+  { paragraph: 4, condition: { dimensionId: 'ideal', range: 'low' }, text: '务实让你走得稳健，但偶尔抬头仰望星空，给自己一个遥远的目标——不是为了脱离现实，而是为脚下的路赋予更深远的意义。' },
+  { paragraph: 4, condition: { dimensionId: 'ideal', range: 'high' }, text: '理想是你的翅膀，但翅膀也需要大地的支撑。在追逐星辰的路上，别忘了脚下的泥土——最伟大的梦想，也需要一步一步地实现。' },
+]
