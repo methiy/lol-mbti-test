@@ -1,6 +1,6 @@
 <!-- app/components/ResultPage.vue -->
 <script setup lang="ts">
-import type { MatchResult, ScaleQuestion, ScenarioQuestion } from '~/types'
+import type { DimensionEvidence, MatchResult, ScaleQuestion, ScenarioQuestion } from '~/types'
 import { regions as lolRegions } from '~/data/regions'
 import { heroes as lolHeroes } from '~/data/heroes'
 import { factions as opFactions } from '~/data/onepiece/factions'
@@ -9,21 +9,28 @@ import { characters as opCharacters } from '~/data/onepiece/characters'
 const emit = defineEmits<{ restart: [] }>()
 
 const { theme, scaleAnswers, scenarioAnswers, activeScaleQuestions, activeScenarioQuestions } = useQuiz()
-const { calculateScores } = useScoring()
+const { calculateScoresWithEvidence } = useScoring()
 const { getMatchResult } = useMatching()
 
 const activeRegions = computed(() => theme.value === 'lol' ? lolRegions : opFactions)
 const activeHeroes = computed(() => theme.value === 'lol' ? lolHeroes : opCharacters)
 
-const result = computed<MatchResult>(() => {
-  const scores = calculateScores(
+const scoringResult = computed(() => {
+  return calculateScoresWithEvidence(
     scaleAnswers.value as (number | null)[],
     scenarioAnswers.value as (number | null)[],
     activeScaleQuestions.value as ScaleQuestion[],
     activeScenarioQuestions.value as ScenarioQuestion[],
   )
-  return getMatchResult(scores, activeRegions.value, activeHeroes.value)
 })
+
+const result = computed<MatchResult>(() => {
+  const { scores, evidence } = scoringResult.value
+  const matchResult = getMatchResult(scores, activeRegions.value, activeHeroes.value)
+  return { ...matchResult, evidence }
+})
+
+const evidence = computed<DimensionEvidence[]>(() => scoringResult.value.evidence)
 
 const sectionRefs = ref<HTMLElement[]>([])
 const visibleSections = ref<Set<number>>(new Set())
@@ -86,29 +93,38 @@ onMounted(() => {
       <DimensionReadings :scores="result.dimensionScores" />
     </section>
 
-    <!-- Hero cards -->
+    <!-- Result explanation -->
     <section
       :ref="(el) => setSectionRef(el, 3)"
       class="result-section"
       :class="{ visible: visibleSections.has(3) }"
+    >
+      <ResultExplanation :evidence="evidence" />
+    </section>
+
+    <!-- Hero cards -->
+    <section
+      :ref="(el) => setSectionRef(el, 4)"
+      class="result-section"
+      :class="{ visible: visibleSections.has(4) }"
     >
       <HeroCard :top-heroes="result.topHeroes" :region="result.region" />
     </section>
 
     <!-- Summary text -->
     <section
-      :ref="(el) => setSectionRef(el, 4)"
+      :ref="(el) => setSectionRef(el, 5)"
       class="result-section"
-      :class="{ visible: visibleSections.has(4) }"
+      :class="{ visible: visibleSections.has(5) }"
     >
       <SummaryText :result="result" />
     </section>
 
     <!-- Share & restart -->
     <section
-      :ref="(el) => setSectionRef(el, 5)"
+      :ref="(el) => setSectionRef(el, 6)"
       class="result-section actions"
-      :class="{ visible: visibleSections.has(5) }"
+      :class="{ visible: visibleSections.has(6) }"
     >
       <ShareCard :result="result" />
       <button class="restart-btn" @click="emit('restart')">重新测试</button>

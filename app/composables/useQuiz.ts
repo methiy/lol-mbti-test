@@ -1,5 +1,5 @@
 // app/composables/useQuiz.ts
-import type { ScaleQuestion, ScenarioQuestion } from '~/types'
+import type { DimensionId, ScaleQuestion, ScenarioQuestion } from '~/types'
 import { scaleQuestions as allScaleQuestions } from '~/data/scaleQuestions'
 import { scenarioQuestions as lolScenarios } from '~/data/scenarioQuestions'
 import { scenarioQuestions as opScenarios } from '~/data/onepiece/scenarioQuestions'
@@ -8,8 +8,8 @@ import { DIMENSION_IDS } from '~/data/dimensions'
 export type Scene = 'welcome' | 'scale' | 'scenario' | 'loading' | 'result'
 export type Theme = 'lol' | 'onepiece'
 
-const SCALE_PER_DIMENSION = 3
-const SCENARIO_COUNT = 8
+const SCALE_PER_DIMENSION = 4
+const SCENARIO_COUNT = 10
 
 /** Shuffle array in-place (Fisher-Yates) and return it */
 function shuffle<T>(arr: T[]): T[] {
@@ -31,10 +31,40 @@ function pickScaleQuestions(): ScaleQuestion[] {
   return shuffle(picked) // shuffle final order so dimensions are mixed
 }
 
-/** Pick random scenario questions from a given pool */
+/**
+ * Pick scenario questions with balanced dimension coverage.
+ * First ensures each dimension is covered by at least one question,
+ * then fills remaining slots randomly.
+ */
 function pickScenarioQuestions(pool: ScenarioQuestion[]): ScenarioQuestion[] {
-  const shuffled = shuffle([...pool])
-  return shuffled.slice(0, SCENARIO_COUNT)
+  const shuffledPool = shuffle([...pool])
+  const picked: ScenarioQuestion[] = []
+  const pickedIds = new Set<number>()
+  const coveredDimensions = new Set<DimensionId>()
+
+  // Phase 1: Cover each dimension with one question
+  for (const dimId of DIMENSION_IDS) {
+    if (coveredDimensions.has(dimId)) continue
+    const candidate = shuffledPool.find(
+      (q) => q.primaryDimension === dimId && !pickedIds.has(q.id),
+    )
+    if (candidate) {
+      picked.push(candidate)
+      pickedIds.add(candidate.id)
+      coveredDimensions.add(dimId)
+    }
+  }
+
+  // Phase 2: Fill remaining slots from unused questions
+  const remaining = SCENARIO_COUNT - picked.length
+  if (remaining > 0) {
+    const extras = shuffledPool
+      .filter((q) => !pickedIds.has(q.id))
+      .slice(0, remaining)
+    picked.push(...extras)
+  }
+
+  return shuffle(picked)
 }
 
 const scene = ref<Scene>('welcome')

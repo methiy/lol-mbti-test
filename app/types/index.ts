@@ -22,6 +22,7 @@ export interface ScaleQuestion {
   text: string
   dimensionId: DimensionId
   reverse: boolean
+  weight: number
 }
 
 export interface ScenarioOption {
@@ -33,6 +34,7 @@ export interface ScenarioOption {
 export interface ScenarioQuestion {
   id: number
   narrative: string
+  primaryDimension: DimensionId
   options: [ScenarioOption, ScenarioOption, ScenarioOption, ScenarioOption]
 }
 
@@ -80,4 +82,26 @@ export interface MatchResult {
     similarity: number
   }[]
   dimensionScores: DimensionVector
+  evidence?: DimensionEvidence[]
+}
+
+export interface ScaleContribution {
+  questionText: string
+  answer: number
+  effectiveScore: number
+  direction: 'towards_high' | 'towards_low' | 'neutral'
+}
+
+export interface ScenarioContribution {
+  narrative: string
+  chosenOption: string
+  weight: number
+  direction: 'towards_high' | 'towards_low'
+}
+
+export interface DimensionEvidence {
+  dimensionId: DimensionId
+  finalScore: number
+  scaleContributions: ScaleContribution[]
+  scenarioContributions: ScenarioContribution[]
 }
